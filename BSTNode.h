@@ -18,15 +18,19 @@ class BSTNode
 {
 public:
 
-	ElementType data;   // The data in the node
+	ElementType element;   // The data in the node
 	BSTNode<ElementType>* left;   // Pointer to left node
     BSTNode<ElementType>* right;  // Pointer to right node
 	
 	// Constructors and destructor
 	BSTNode();
         ~BSTNode();
-	BSTNode(const ElementType& theData);
-	BSTNode(const ElementType& theData, BSTNode<ElementType>* theLeftNode, BSTNode<ElementType>* theRightNode);
+	BSTNode(const ElementType& theElement);
+	BSTNode(const ElementType& theElement, BSTNode<ElementType>* theLeftNode, BSTNode<ElementType>* theRightNode);
+
+
+bool hasLeft();
+bool hasRight();
 
 }; // end Node
 
@@ -46,19 +50,38 @@ BSTNode<ElementType>::~BSTNode()
 }
 
 template <class ElementType>
-BSTNode<ElementType>::BSTNode(const ElementType& theData)
+BSTNode<ElementType>::BSTNode(const ElementType& theElement)
 {
-	data = theData;
+	element = theElement;
 	left = NULL;
     right = NULL;
 }
 
 template <class ElementType>
-BSTNode<ElementType>::BSTNode(const ElementType& theData, BSTNode<ElementType>* theLeftNode, BSTNode<ElementType>* theRightNode)
+BSTNode<ElementType>::BSTNode(const ElementType& theElement, BSTNode<ElementType>* theLeftNode, BSTNode<ElementType>* theRightNode)
 {
-	data = theData;
+	element = theElement;
 	left = theLeftNode;
     right = theRightNode;
 }
 
+template <class ElementType>
+bool BSTNode<ElementType>::hasLeft() {
+
+if (this->left == NULL)
+   return false;
+
+else
+   return true;
+}
+
+template <class ElementType>
+bool BSTNode<ElementType>::hasRight() {
+
+if (this->right == NULL)
+   return false;
+
+else
+   return true;
+}
 

@@ -92,8 +92,8 @@ void BST<ElementType>::makeEmpty(BSTNode<ElementType>* current) {
 
        makeEmpty(current->left);
 
-       delete current->data;
-       current->data = NULL;
+       delete current->element;
+       current->element = NULL;
        delete current;
        current = NULL;
        

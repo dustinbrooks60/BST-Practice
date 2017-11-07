@@ -77,6 +77,39 @@ Player::Player(int inputLeaderboardPosition, string inputName, string inputSeaso
   theFaceoffWins = inputFaceoffWins;
 }
 
+
+Player::~Player() {
+
+  theLeaderboardPosition = 0;
+  theName = "";
+  theSeason = "";
+  theTeam = "";
+  thePosition = "";
+  theGamesPlayed = 0;
+  theGoals = 0;
+  theAssists = 0;
+  thePoints = 0;
+  thePlusMinus = 0;
+  thePenaltyMinutes = 0;
+  thePointsPerGame = 0;
+  thePowerPlayGoals = 0;
+  thePowerPlayPoints = 0;
+  theShorthandedGoals = 0;
+  theShorthandedPoints = 0;
+  theGameWinningGoals = 0;
+  theOvertimeGoals = 0;
+  theTotalShots = 0;
+  theShootingPercentage = 0;
+  theTimeOnIce = 0;
+  theShiftsPerGame = 0;
+  theFaceoffWins = 0;
+
+
+}
+
+
+
+
 /*
 //Constructor for goalies
 Player::Player(double inputGAA, double inputSavePercentage, int inputWins, int inputShutouts) {
@@ -114,7 +147,7 @@ string Player::getSeason() const {
   return theSeason;
 }
 
-// Description: Returns a patient's address.
+
 string Player::getTeam() const {
 
   return theTeam;
@@ -145,7 +178,7 @@ int Player::getAssists() const {
 }
 
 
-// Description: Returns a patient's care card number.
+
 int Player::getPoints() const {
 
   return thePoints;
@@ -177,7 +210,7 @@ int Player::getPowerPlayPoints() const {
   return thePowerPlayPoints;
 }
 
-int Player::getShortandedGoals() const {
+int Player::getShorthandedGoals() const {
  
   return theShorthandedGoals;
 }
@@ -411,9 +444,9 @@ void Player::setShutouts(const int aShutouts) {
 // Description: Comparison operator. Compares "this" Patient object with "rhs" Patient object.
 //              Returns true if both Patient objects have the same care card number and false 
 //              otherwise.
-bool Player::operator==(const Player & rhs) {
+bool Player::operator==(const Player &rhs) const {
 
-  if (thePoints == rhs.getPoints() ) 
+  if (theLeaderboardPosition == rhs.getLeaderboardPosition() ) 
      return true;
 
   else 
@@ -425,15 +458,24 @@ bool Player::operator==(const Player & rhs) {
 //              object.
 //              Returns true if the care card number of "this" Patient object is > the care 
 //              card number of "rhs" Patient object and false otherwise.
-bool Player::operator>(const Player & rhs) {
+bool Player::operator>(const Player &rhs) const {
 
-  if (thePoints > rhs.getPoints() )
+  if (theLeaderboardPosition > rhs.getLeaderboardPosition() )
     return true;
 
   else 
     return false;
 }
 
+
+bool Player::operator<(const Player &rhs) const {
+
+  if (theLeaderboardPosition < rhs.getLeaderboardPosition() )
+    return true;
+
+  else 
+    return false;
+}
 
 
   
@@ -442,7 +484,7 @@ bool Player::operator>(const Player & rhs) {
 // Description: Prints the content of "this" player.
 void Player::printPlayer() {
 
- cout << "Leaderboard Position: " << theLeaderboardPosition << "\n" << "Name: " << theName << "\n" << "Season: " << theSeason << "\n" <<  "Team: " << theTeam << "Position: " << thePosition << "\n" << "Games Played: " << theGamesPlayed << "\n" << "Goals: " << theGoals << "\n" << "Assists: " << theAssists << "\n" << "Points: " << thePoints << "\n" << "+/-: " << thePlusMinus << "\n" << "Penalty Minutes: " << thePenaltyMinutes << "\n" << "Points Per Game: " << thePointsPerGame << "\n" << "Power Play Goals: " << thePowerPlayGoals << "\n" << "Power Play Points: " << thePowerPlayPoints << "\n" << "Shorthanded Goals: " << theShorthandedGoals << "\n" << "Shorthanded Points: " << theShorthandedPoints << "\n" << "Game winning goals: " << theGameWinningGoals << "\n" << "Overtime Goals: " << theOvertimeGoals << "\n" << "Total shots: " << theTotalShots << "\n" << "Shooting percentage: " << theShootingPercentage << "\n" << "Time on ice: " << theTimeOnIce << "\n" << "Shifts per game: " << theShiftsPerGame << "\n" << "Faceoff Wins: " << theFaceoffWins << "\n";
+ cout << "Leaderboard Position: " << theLeaderboardPosition << "\n" << "Name: " << theName << "\n" << "Season: " << theSeason << "\n" <<  "Team: " << theTeam << "\n" << "Position: " << thePosition << "\n" << "Games Played: " << theGamesPlayed << "\n" << "Goals: " << theGoals << "\n" << "Assists: " << theAssists << "\n" << "Points: " << thePoints << "\n" << "+/-: " << thePlusMinus << "\n" << "Penalty Minutes: " << thePenaltyMinutes << "\n" << "Points Per Game: " << thePointsPerGame << "\n" << "Power Play Goals: " << thePowerPlayGoals << "\n" << "Power Play Points: " << thePowerPlayPoints << "\n" << "Shorthanded Goals: " << theShorthandedGoals << "\n" << "Shorthanded Points: " << theShorthandedPoints << "\n" << "Game winning goals: " << theGameWinningGoals << "\n" << "Overtime Goals: " << theOvertimeGoals << "\n" << "Total shots: " << theTotalShots << "\n" << "Shooting percentage: " << theShootingPercentage << "\n" << "Time on ice: " << theTimeOnIce << "\n" << "Shifts per game: " << theShiftsPerGame << "\n" << "Faceoff Wins: " << theFaceoffWins << "\n";
 
 
 }

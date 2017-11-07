@@ -8,6 +8,7 @@
    
 
 #include <fstream>
+#include <sstream>
 #include <iostream>
 #include <string>
 #include <cctype>
@@ -16,9 +17,30 @@
 
 using namespace std;
 
-ifstream inFile;
+
+void following(BST<Player>& thePlayers) {
+
+string inputTeam;
+Player inputPlayer;
+
+cout << "What is your favorite team? (enter the 3 letter acronym - ie. Washington will be WSH)" << endl;
+
+getline(cin >> ws, inputTeam);
+
+inputPlayer.setTeam(inputTeam);
+
+Player searchedPlayer = thePlayers.retrieve(inputPlayer);
 
 
+cout << "The player with the highest points on this team is: " << searchedPlayer.getName() << endl;
+
+return;
+
+}
+
+
+
+/*
 void enter(BST * thePlayers) {
 
 Player thePlayer();
@@ -47,33 +69,61 @@ Player thePlayer();
   double playerFaceoffWins;
 
 
-getline(cin >> ws, playerName);
+cout << "Please enter the player's leaderboard position: "
 
-thePlayer.setName(playerName);
+getline(cin >> ws, playerLeaderboardPosition);
 
-cout << "Please enter the player's team: " << endl;
+thePlayer.setLeaderboardPosition(playerLeaderboardPosition);
+
+cout << "Please enter the player's name: " << endl;
 
 getline(cin >> ws, playerTeam);
 
-thePatient.setTeam(playerTeam);
+thePlayer.setName(playerName);
 
-cout << "Please enter the address: " << endl;
+cout << "Please enter the player's season: " << endl;
 
-getline(cin >> ws, theAddress);
+getline(cin >> ws, playerSeason);
 
-thePatient.setAddress(theAddress);
+thePlayer.setSeason(playerSeason);
 
-cout << "Please enter the phone number: " << endl;
+cout << "Please enter the player's team: " << endl;
 
-getline(cin >> ws, thePhone);
+getline(cin >> ws, theTeam);
 
-thePatient.setPhone(thePhone);
+thePlayer.setTeam(playerTeam);
 
-cout << "Please enter the email: " << endl;
+cout << "Please enter the player's position: " << endl;
 
-getline(cin >> ws, theEmail);
+getline(cin >> ws, playerPosition);
 
-thePatient.setEmail(theEmail);
+thePlayer.setPosition(playerPosition);
+
+cout << "Please enter the number of games played: " << endl;
+
+getline(cin >> ws, playerGamesPlayed);
+
+thePlayer.setGamesPlayed(playerGamesPlayed);
+
+cout << "Please enter the number of goals: " << endl;
+
+getline(cin >> ws, playerGoals);
+
+thePlayer.setPosition(playerGoals);
+
+cout << "Please enter the number of assists: " << endl;
+
+getline(cin >> ws, playerAssists);
+
+thePlayer.setPosition(playerAssists);
+
+
+
+
+
+
+
+
 
 if (thePlayers->insert(thePlayer))
    cout << "The player has been successfully entered" << endl;
@@ -185,39 +235,111 @@ switch(input2) {
 }
 }
 
+*/
 
-void print(List * thePatients) {
 
-thePatients->printList();
+/*
+void printAll(BST<Player> * thePlayers) {
+
+thePlayers->traverseInOrder(printPlayer(this->Player));
+
+return;
 }
+*/
+
+
+
 
 int main() {
 
   // Variables declaration
-  List* patients = new List(); 
+  BST<Player> thePlayers; 
+  Player newPlayer;
   bool done = false;
   char input = 0;
+  string aLine;
+
+
+  int placeholderLeaderboard;
+  string placeholderName;
+  string placeholderSeason;
+  string placeholderTeam;
+  string placeholderPosition;
+  int placeholderGamesPlayed;
+  int placeholderGoals;
+  int placeholderAssists;
+  int placeholderPoints;
+  int placeholderPlusMinus;
+  int placeholderPenaltyMinutes;
+  double placeholderPointsPerGame;
+  int placeholderPowerPlayGoals;
+  int placeholderPowerPlayPoints;
+  int placeholderShorthandedGoals;
+  int placeholderShorthandedPoints;
+  int placeholderGameWinningGoals;
+  int placeholderOvertimeGoals;
+  int placeholderTotalShots;
+  double placeholderShootingPercentage;
+  double placeholderTimeOnIce;
+  double placeholderShiftsPerGame;
+  double placeholderFaceoffWins;
+
+ifstream inFile("dataFile.txt");
+
+if (!inFile) {
+
+cout << "Unable to open player file!" << endl;
+}
+
+if (inFile.is_open()) {
+
+while (getline(inFile, aLine)) {
+
+	stringstream ss(aLine);
+        ss >> placeholderLeaderboard >> placeholderName >> 	
+	placeholderSeason >> placeholderTeam >> placeholderPosition >> 
+	placeholderGamesPlayed >> placeholderGoals >> placeholderAssists 
+	>> placeholderPoints >> placeholderPlusMinus >> 
+	placeholderPenaltyMinutes >> placeholderPointsPerGame >> 
+	placeholderPowerPlayGoals >> placeholderPowerPlayPoints >> 
+	placeholderShorthandedGoals >> placeholderShorthandedPoints >> 
+	placeholderGameWinningGoals >> placeholderOvertimeGoals >> 
+	placeholderTotalShots >> placeholderShootingPercentage >> 
+	placeholderTimeOnIce >> placeholderShiftsPerGame >> 
+	placeholderFaceoffWins; 
+
+newPlayer = Player(placeholderLeaderboard, placeholderName, placeholderSeason, placeholderTeam, placeholderPosition, placeholderGamesPlayed, placeholderGoals, placeholderAssists, placeholderPoints, placeholderPlusMinus, placeholderPenaltyMinutes, placeholderPointsPerGame, placeholderPowerPlayGoals, placeholderPowerPlayPoints, placeholderShorthandedGoals, placeholderShorthandedPoints, placeholderGameWinningGoals, placeholderOvertimeGoals, placeholderTotalShots, placeholderShootingPercentage, placeholderTimeOnIce, placeholderShiftsPerGame, placeholderFaceoffWins);
+
+
+thePlayers.insert(newPlayer);
+
+}
+}
+
 
   // Keep doing what the user selects until the user exits
-  while (not done) {
+while (not done) {
     // Print menu to user 
-  cout << "\n-----Welcome to NHL stats simplified!\n" << endl;
-  cout << "To enter a new patient, enter: e" << endl;
-  cout << "To remove a patient, enter: r" << endl;
-  cout << "To search for a patient: enter s" << endl;
-  cout << "To modify a patient: enter m" << endl;
-  cout << "To print all patients: enter p" << endl;
+  cout << "\n-----Welcome to NHL stats simplified!-----\n" << endl;
+  cout << "To determine which player you should be following, enter: f" << endl;
+  cout << "To enter a new player, enter: e" << endl;
+  cout << "To search for a player: enter s" << endl;
+  cout << "To modify a player: enter m" << endl;
+  cout << "To print all players: enter p" << endl;
   cout << "To exit: enter x" << endl;
     cout << "Your choice: ";
     cin >> input;
     input = tolower(input);
     switch(input) {
-      case 'e': enter(patients); break;
-      case 'r': remove(patients); break;
-      case 's': searching(patients); break;
-      case 'm': modify(patients); break;
-      case 'p': print(patients); break;
-      case 'x': cout << "\n----Bye!\n" << endl; done = true; delete patients; break;
+
+      case 'f': following(thePlayers); break;
+/*
+      case 'e': enter(thePlayers); break;
+      case 's': searching(thePlayers); break;
+      case 'm': modify(thePlayers); break;
+      case 'p': print(thePlayers); break;
+*/
+      case 'x': cout << "\n----Bye!\n" << endl; done = true; /* delete thePlayers */; break;
       default: cout << "Not sure what you mean! Please, try again!" << endl;
     }
 
@@ -225,6 +347,7 @@ int main() {
 
   return 0;
 }
+
 
 
 

@@ -11,11 +11,7 @@
 
 using namespace std;
 
-// Default Constructor
-// Description:   Create a blank patient member
-// Postcondition: name set to "To be entered", address set to "To be entered", phone set to 
-//                "To be entered", email set to "To be entered", and care card is set to 
-//                "0000000000".
+
 class Player {
 
 private:
@@ -46,16 +42,15 @@ private:
 
 
 
-// Constructor
-// Description:   Create a patient with a specific care card number
-// Postcondition: name set to "To be entered", address set to "To be entered", phone set to 
-//                "To be entered", email set to "To be entered", and care card is set to 
-//                aCareCard.
 
 public:
 
+// Default Constructor
 Player();
 
+// Parameterized Constructor
+// Description:   Create a player with specific stats
+// Postcondition: All variables are filled in for the player member
 Player(int inputLeaderboardPosistion, string inputName, string inputSeason, string inputTeam,  string inputPosition, int inputGamesPlayed, int inputGoals, int inputAssists, int inputPoints, int inputPlusMinus, int inputPenaltyMinutes, double inputPointsPerGame, int inputPowerPlayGoals, int inputPowerPlayPoints, int inputShorthandedGoals, int inputShorthandedPoints, int inputGameWinningGoals, int inputOvertimeGoals, int inputTotalShots, double inputShootingPercentage, double inputTimeOnIce, double inputShiftsPerGame, double inputFaceoffWins);
 
 /*
@@ -92,7 +87,7 @@ int getPowerPlayGoals() const;
 
 int getPowerPlayPoints() const;
 
-int getShortandedGoals() const;
+int getShorthandedGoals() const;
 
 int getShorthandedPoints() const;
 
@@ -118,23 +113,17 @@ double getFaceoffWins() const;
 
 void setLeaderboardPosition(const int aLeaderboardPosition);
   
-
 void setName(const string aName);
 
 void setSeason(const string aSeason);
 
-
-// Description: Sets the patient's address.
 void setTeam(const string aTeam);
-
 
 void setPosition(const string aPosition);
 
 void setGamesPlayed(const int aGamesPlayed);
   
-
 void setGoals(const int aGoals);
-
 
 void setAssists(const int aAssists);
 
@@ -171,9 +160,11 @@ void setFaceoffWins(const double aFaceoffWins);
 
 //Miscellaneous functions
 
-bool operator==(const Player & rhs);
+bool operator==(const Player & rhs) const;
 
-bool operator>(const Player & rhs);
+bool operator>(const Player & rhs) const;
+
+bool operator<(const Player &rhs) const;
 
 void printPlayer();
 
